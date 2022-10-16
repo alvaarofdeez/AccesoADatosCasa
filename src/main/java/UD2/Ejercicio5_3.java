@@ -1,52 +1,61 @@
 package UD2;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
 public class Ejercicio5_3 {
 
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // INICIAMOS 'BUFFERED READER' EL CUAL NOS SIRVE PARA LEER LO QUE INTRODUCIMOS POR TECLADO, LO TENEMOS ESTATICO PARA PODER USARLO EN LOS METODOS EXTERNOS A 'MAIN'
+    static RandomAccessFile fichero = null; // INICIAMOS EL FICHERO DE ACCESO ALEATORIO, ESTATICO PARA USARLO EN LOS METODOS EXTERNOS A 'MAIN'
+
     public static void main(String[] args) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        File archivo = null;
-
-        RandomAccessFile fichero = null;
-
-        DataOutputStream salida = null;
-
-        String ruta;
-
+        int num; // INICIAMOS 'NUM', DONDE ALMACENAREMOS EL NÚMERO QUE AÑADIREMOS AL FICHERO BINARIO
         try {
-            ruta = "C:\\Users\\Alvaro\\OneDrive\\2DAM\\Acceso a Datos\\Unidad 2 - Ficheros\\Ejercicio 5\\datos.dat";
-            archivo = new File(ruta);
-            fichero = new RandomAccessFile(archivo, "rw");
+            fichero = new RandomAccessFile("datos.dat", "rw"); // INDICAMOS LA RUTA Y LOS PERMISOS QUE TENDRÁ
 
             System.out.println("ARCHIVO ORIGINAL.");
+            mostrarFichero(); // MOSTRAMOS EL FICHERO
 
-            System.out.println(viewFile(fichero));
+            System.out.println("Ahora añadiremos datos al fichero.");
 
-        } catch (Exception e) {
+            System.out.println("Introduce un número entero.");
+            num = Integer.parseInt(br.readLine()); // LEEMOS LO QUE QUEREMOS INTRODUCIR
+            fichero.seek(fichero.length()); // NOS SITUAMOS AL FINAL DEL FICHERO
+            fichero.writeInt(num); // AÑADIMOS
+
+            System.out.println("ARCHIVO MODIFICADO.");
+            mostrarFichero(); // MOSTRAMOS EL FICHERO
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fichero != null) {
+                    fichero.close(); // CERRAMOS EL FICHERO
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static int viewFile(RandomAccessFile archivo) {
+    public static void mostrarFichero() {
+        int n; // INICIAMOS VARIABLE 'N'
         try {
-            int n;
-            archivo.seek(0); // NOS SITUAMOS AL PRINCIPIO
+            fichero.seek(0); // NOS SITUAMOS AL PRINCIPIO
             while (true) {
-                n = archivo.readInt();
-                return n;
+                n = fichero.readInt();  // LEEMOS EL NUMERO         
+                System.out.println(n); // MOSTRAMOS POR PANTALLA
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (EOFException e) {
+            System.out.println("Fin de fichero"); // CON ESTA EXCEPCIÓN INDICAREMOS CUANDO ACABA EL FICHERO, SI NO PONEMOS UN 'SYSO' INDICANDOLO NOS SALDRÁ UNA EXCEPCIÓN
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        return 0;
     }
 }
