@@ -12,16 +12,16 @@ public class Ejercicio5_2 {
 
     public static void main(String[] args) {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // INICIAMOS 'BUFFERED READER' EL CUAL NOS SIRVE PARA LEER LO QUE INTRODUCIMOS POR TECLADO
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-            FileReader fr = null; // INICIAMOS VARIABLE PARA LEER EL ARCHIVO
+            FileReader fr = null;
 
-            FileWriter fw = null; // INICIAMOS VARIABLE PARA INDICAR QUE ARCHIVO ES EN EL QUE VAMOS A ESCRIBIR 
-            PrintWriter pw = null; // INICIAMOS VARIABLE PARA PODER ESCRIBIR EN EL ARCHIVO
+            FileWriter fw = null;
+            PrintWriter pw = null;
 
-            File archivo = null; // INICIAMOS VARIABLE PARA INDICAR CUAL ES EL ARCHIVO
+            File archivo = null;
 
-            String ruta; // ALMACENAREMOS LA RUTA DEL ARCHIVO
+            String ruta;
 
             System.out.println("--- MENÚ ---");
             System.out.println("1. Crear un fichero.");
@@ -29,83 +29,82 @@ public class Ejercicio5_2 {
             System.out.println("3. Escribir al final de un fichero.");
             System.out.println("4. Salir.");
             System.out.print("Elige una opción: ");
-            int opcion = Integer.parseInt(br.readLine()); // AQUI ALMACENAREMOS QUE OPCION DEL MENU ESCOGEMOS
+            int opcion = Integer.parseInt(br.readLine());
 
-            switch (opcion) { // INICIAMOS EL 'SWITCH'
-                case 1: // OPCIÓN 1
+            switch (opcion) {
+                case 1:
                     try {
-                    ruta = "ejercicio5-1.txt"; // INDICAMOS EL NOMBRE DEL FICHERO, YA QUE ESTÁ DENTRO DEL PROYECTO
-                    archivo = new File(ruta); // INDICAMOS QUE EL ARCHIVO ESTÁ AHÍ
+                    ruta = "C:\\Users\\fernandez.coalv\\OneDrive\\2DAM\\Acceso a Datos\\Unidad 2 - Ficheros\\Ejercicio 5\\holasucolega.txt";
+                    archivo = new File(ruta);
 
-                    if (!archivo.exists()) { // SI EL ARCHIVO NO EXISTE
-                        archivo.createNewFile(); // CREAMOS EL ARCHIVO
-                        System.out.println("El archivo se ha creado correctamente."); // LO INDICAMOS
-                    } else { // SI NO
-                        System.out.println("No se ha podido crear el archivo o ya existe."); // INDICAMOS QUE NO SE PUEDE CREAR O YA ESTÁ CREADO
+                    if (!archivo.exists()) {
+                        archivo.createNewFile();
+                    } else {
+                        System.out.println("No se ha podido crear el archivo o ya existe.");
                     }
-                    break; // SALIMOS DEL 'SWITCH'
+                    break;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                case 2: // OPCIÓN 2
+                case 2:
                     try {
-                    ruta = "ejercicio5-1.txt"; // INDICAMOS EL NOMBRE DEL FICHERO, YA QUE ESTÁ DENTRO DEL PROYECTO
-                    archivo = new File(ruta); // INDICAMOS QUE EL ARCHIVO ESTÁ AHÍ
+                    ruta = "C:\\Users\\fernandez.coalv\\OneDrive\\2DAM\\Acceso a Datos\\Unidad 2 - Ficheros\\Ejercicio 5\\holasucolega.txt";
+                    archivo = new File(ruta);
 
-                    if (!archivo.exists()) { // SI EL ARCHIVO NO EXISTE
-                        System.out.println("El archivo no existe."); // INDICAMOS QUE NO EXISTE
-                    } else { // SI NO
-                        fr = new FileReader(archivo); // INDICAMOS QUE ARCHIVO VAMOS A LEER
-                        br = new BufferedReader(fr); // INDICAMOS QUE VAMOS A LEERLO CON LA VARIABLE 'BR' (BUFFERED READER)
+                    if (!archivo.exists()) {
+                        System.out.println("El archivo no existe.");
+                    } else {
+                        fr = new FileReader(archivo);
+                        br = new BufferedReader(fr);
 
-                        String linea; // AQUI LEEREMOS LINEA POR LINEA
+                        String linea;
 
-                        while ((linea = br.readLine()) != null) { // MIENTRAS SIGA HABIENDO LINEAS, SEGUIRÁ LEYENDO
-                            System.out.println(linea); // MOSTRAMOS POR PANTALLA
+                        while ((linea = br.readLine()) != null) {
+                            System.out.println(linea);
                         }
                     }
-                    break; // SALIMOS DEL 'SWITCH'
+                    break;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                case 3: // OPCIÓN 3
+                case 3:
                     try {
-                    ruta = "ejercicio5-1.txt"; // INDICAMOS EL NOMBRE DEL FICHERO, YA QUE ESTÁ DENTRO DEL PROYECTO
-                    archivo = new File(ruta); // INDICAMOS QUE EL ARCHIVO ESTÁ AHÍ
+                    ruta = "C:\\Users\\fernandez.coalv\\OneDrive\\2DAM\\Acceso a Datos\\Unidad 2 - Ficheros\\Ejercicio 5\\holasucolega.txt";
+                    archivo = new File(ruta);
 
-                    if (!archivo.exists()) { // SI EL ARCHIVO NO EXISTE
-                        System.out.println("El archivo no existe."); // INDICAMOS QUE NO EXISTE
-                    } else { // SI NO
-                        fw = new FileWriter(archivo, true); // INDICAMOS QUE ARCHIVO VAMOS A ESCRIBIR
-                        pw = new PrintWriter(fw); // INDICAMOS QUE LO HAREMOS CON LA VARIABLE 'PW' (PRINT WRITER)
+                    if (!archivo.exists()) {
+                        System.out.println("El archivo no existe.");
+                    } else {
+                        fw = new FileWriter(archivo, true);
+                        pw = new PrintWriter(fw);
 
-                        boolean bandera = true; // CON ESTA VARIABLE CONTROLAREMOS SI EL USUARIO QUIERE SEGUIR INTRODUCIENDO LINEAS
-                        pw.println(); // ESCRIBIMOS UNA LINEA EN BLANCO
-                        do { // USAREMOS UN 'DO WHILE'
+                        boolean bandera = true;
+                        pw.println();
+                        do {
                             System.out.println("Introduce el contenido que deseas añadir:");
-                            pw.println("" + br.readLine()); // AÑADIMOS LA LINEA AL FICHERO
+                            pw.println("" + br.readLine());
 
                             System.out.println("¿Desea introducir otra línea? S/n");
-                            String eleccion = br.readLine(); // ALMACENAMOS LA ELECCION
-                            if (eleccion.equalsIgnoreCase("n")) { // SI LA ELECCION EL 'N' 
-                                bandera = false; // PONEMOS BANDERA A 'FALSE'
-                            } else { // SI NO
-                                bandera = true; // SEGUIMOS CON LA BANDERA A 'TRUE'
+                            String eleccion = br.readLine();
+                            if (eleccion.equalsIgnoreCase("n")) {
+                                bandera = false;
+                            } else {
+                                bandera = true;
                             }
-                        } while (bandera != false); // SEGUIRA ESCRIBIENDO MENOS CUANDO BANDERA ESTE EN 'FALSE'
+                        } while (bandera != false);
                     }
-                    break; // SALIMOS DEL 'SWITCH'
+                    break;
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
                     if (null != pw) {
-                        pw.close(); // CERRAMOS EL 'PW'
+                        pw.close();
                     }
                 }
-                case 4: // OPCIÓN 4
-                    break; // SALIMOS DEL 'SWITCH'
-                default: // SI NO ESCOGEMOS NINGUNA OPCIÓN
-                    break; // SALIMOS DEL 'SWITCH'
+                case 4:
+                    break;
+                default:
+                    break;
             }
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
