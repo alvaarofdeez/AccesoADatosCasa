@@ -1,5 +1,4 @@
-// Parsing DOM y visualización de documento DOM generado
-package dom_parser;
+package UD3;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -56,12 +55,12 @@ public class DOM_Parser {
 
     public static void main(String[] args) {
         String nomFich = "clientes.xml";
-        /*if (args.length < 1) {
+        /* if (args.length < 1) {
             System.out.println("Indicar por favor nombre de fichero");
             return;
         } else {
             nomFich = args[0];
-        }*/
+        } */
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setIgnoringComments(true);
