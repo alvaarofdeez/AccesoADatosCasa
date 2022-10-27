@@ -76,6 +76,7 @@ public class Ejercicio2Repaso {
             }
             System.out.println("***********************************************************");
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
     }

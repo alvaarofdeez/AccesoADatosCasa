@@ -29,7 +29,7 @@ public class Ejercicio2Repaso {
             in.close(); // CERRAMOS VARIABLE ENTRADA
             out.close(); // CERRAMOS VARIABLE SALIDA
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }
